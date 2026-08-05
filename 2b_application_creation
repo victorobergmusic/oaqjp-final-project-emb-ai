@@ -1,0 +1,7 @@
+$ python3
+Python 3.10.6 (main, Nov 14 2022, 16:10:14) [GCC 11.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from emotion_detection import emotion_detector
+>>> emotion_detector("I love this new technology.")
+'{\n  "emotionPredictions": [\n    {\n      "emotion": {\n        "anger": 0.013646631,\n        "disgust": 0.0017160787,\n        "fear": 0.008986979,\n        "joy": 0.9728826,\n        "sadness": 0.009587421\n      },\n      "target": "",\n      "emotionMentions": [\n        {\n          "span": {\n            "begin": 0,\n            "end": 27,\n            "text": "I love this new technology."\n          },\n          "emotion": {\n            "anger": 0.013646631,\n            "disgust": 0.0017160787,\n            "fear": 0.008986979,\n            "joy": 0.9728826,\n            "sadness": 0.009587421\n          }\n        }\n      ]\n    }\n  ],\n  "producerId": {\n    "name": "Ensemble SVM ensemble",\n    "version": "0.0.1"\n  }\n}'
+>>> exit()
