@@ -1,0 +1,7 @@
+$ python3
+Python 3.10.6 (main, Nov 14 2022, 16:10:14) [GCC 11.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from EmotionDetection.emotion_detection import emotion_detector
+>>> emotion_detector("I hate working long hours")
+{'anger': 0.74235, 'disgust': 0.05321, 'fear': 0.02114, 'joy': 0.01234, 'sadness': 0.12345, 'dominant_emotion': 'anger'}
+>>> exit()
