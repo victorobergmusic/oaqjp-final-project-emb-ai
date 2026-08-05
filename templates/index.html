@@ -1,32 +1,37 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NLP Emotion Detection</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./static/mywebscript.js"></script>
+    <script src="{{ url_for('static', filename='mywebscript.js') }}" defer></script>
     <style>
         .center-heading {
             text-align: center;
         }
     </style>
 </head>
-<body>
-    <div class="card">
+<body class="bg-light">
+    <main class="container py-5">
+    <div class="card shadow-sm">
         <div class="card-body">
-            <h1 class="center-heading">NLP - Emotion Detection</h1> 
-            <div style="padding: 25px 25px 25px 25px;">
-            <h2 class="mb-3">
-                <label class="form-label">Please enter the text to be analyzed</label>
-                <input type="textarea" class="form-control" id="textToAnalyze">
-            </h2>
+            <h1 class="center-heading">NLP Emotion Detection</h1>
+            <div class="p-4">
+                <label for="textToAnalyze" class="h2 mb-3">Please enter the text to be analyzed</label>
+                <textarea class="form-control" id="textToAnalyze" rows="4"></textarea>
 
-            <div style="padding: 25px 25px 25px 25px;">
-                <button onclick="RunSentimentAnalysis()" class="btn btn-secondary">Run Sentiment Analysis</button>
+                <button id="analyzeButton" type="button" class="btn btn-secondary mt-4">
+                    Run Emotion Analysis
+                </button>
             </div>
-            <div style="padding: 25px 25px 25px 25px;"></div>
-            <h2 class="mb-3">
-                <label class="form-label">Result of Emotion Detection</label>
-            </h2>
 
-            <div id="system_response" style="padding: 25px 25px 25px 25px;"></div>
+            <section class="p-4" aria-labelledby="result-heading">
+                <h2 id="result-heading" class="mb-3">Result of Emotion Detection</h2>
+                <div id="system_response" aria-live="polite"></div>
+            </section>
         </div>
     </div>
+    </main>
 </body>
+</html>

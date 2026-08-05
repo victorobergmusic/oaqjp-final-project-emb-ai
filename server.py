@@ -1,21 +1,26 @@
+"""Flask entry point for the emotion detection web application."""
+
 from flask import Flask, render_template, request
-from EmotionDetection.emotion_detection import emotion_detector
+
+from EmotionDetection import EmotionDetectionError, emotion_detector
 
 app = Flask(__name__)
 
-@app.route("/emotionDetector")
+
+@app.get("/emotionDetector")
 def sent_analyzer():
-    # Hämtar argumentet från webbgränssnittet
-    text_to_analyze = request.args.get('textToAnalyze')
+    """Analyze the supplied text and return a readable result."""
+    text_to_analyze = request.args.get("textToAnalyze", "")
 
-    # Kör funktionen från paketet
-    response = emotion_detector(text_to_analyze)
+    try:
+        response = emotion_detector(text_to_analyze)
+    except EmotionDetectionError as exc:
+        app.logger.warning("Emotion analysis failed: %s", exc)
+        return "The emotion service is temporarily unavailable. Please try again.", 502
 
-    # Felhantering: Kollar om värdet är None (Task 7)
     if response['dominant_emotion'] is None:
-        return "Invalid text! Please try again!"
+        return "Invalid text! Please try again!", 400
 
-    # Formaterar outputen exakt enligt instruktionerna
     return (
         f"For the given statement, the system response is "
         f"'anger': {response['anger']}, 'disgust': {response['disgust']}, "
@@ -24,11 +29,12 @@ def sent_analyzer():
         f"The dominant emotion is {response['dominant_emotion']}."
     )
 
-@app.route("/")
+
+@app.get("/")
 def render_index_page():
-    # Laddar startsidan
+    """Render the application page."""
     return render_template('index.html')
 
+
 if __name__ == "__main__":
-    # Kör servern
     app.run(host="0.0.0.0", port=5000)
